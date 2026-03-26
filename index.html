@@ -11,9 +11,9 @@
     <!-- Bandeau offre de lancement -->
     <div class="top-offer" role="region" aria-label="Offre de lancement">
       <div class="container top-offer__inner">
-        <div class="top-offer__text">
-          <span class="top-offer__label">Offre de lancement :</span>
-          <strong class="top-offer__value">-50%</strong>
+        <div class="top-offer__text" id="top-offer-text">
+          <span class="top-offer__label" id="top-offer-label">Offre de lancement :</span>
+          <strong class="top-offer__value" id="top-offer-value">-50%</strong>
         </div>
         <a class="btn btn--sm btn--accent" href="#devis" aria-label="Demander un devis">
           Demander un devis
@@ -53,7 +53,7 @@
         <div class="container hero__grid">
           <div class="hero__content">
             <div class="hero__badgeRow">
-              <div class="badge-offer" aria-label="Offre de lancement -50 pour cent">Offre de lancement <strong>-50%</strong></div>
+              <div class="badge-offer" id="hero-offer-badge" aria-label="Offre de lancement -50 pour cent"><span id="hero-offer-label">Offre de lancement</span> <strong id="hero-offer-value">-50%</strong></div>
               <div class="badge-soft" aria-label="Disponibilité">Disponible dès mi-avril</div>
             </div>
 
@@ -288,6 +288,7 @@
                   <div class="range-row">
                     <input id="sim-quantity-range" type="range" min="10" max="500" value="100" step="1" aria-label="Quantité" />
                   </div>
+                  <div class="field__help" id="sim-unit-rate">Tarif utilise : -</div>
                   <div class="field__help" id="sim-quantity-help">Ajustez selon votre besoin.</div>
                 </div>
               </div>
@@ -295,15 +296,15 @@
 
             <div class="sim__result" aria-live="polite">
               <div class="result-grid">
-                <div class="result-card result-card--promo">
-                  <div class="result-card__label">Prix promo estimé</div>
+                <div class="result-card result-card--promo" id="result-final-card">
+                  <div class="result-card__label" id="result-final-label">Prix promo estimé</div>
                   <div class="result-card__value" id="price-after">-</div>
                 </div>
-                <div class="result-card result-card--accent">
-                  <div class="result-card__label">Réduction lancement -50%</div>
+                <div class="result-card result-card--accent" id="result-discount-card">
+                  <div class="result-card__label" id="result-discount-label">Réduction lancement -50%</div>
                   <div class="result-card__value" id="discount-value">-</div>
                 </div>
-                <div class="result-card result-card--quiet">
+                <div class="result-card result-card--quiet" id="result-before-card">
                   <div class="result-card__label">Prix initial estimé</div>
                   <div class="result-card__value" id="price-before">-</div>
                 </div>
@@ -348,6 +349,7 @@
             <input type="hidden" name="estimated_before" id="form_estimated_before" />
             <input type="hidden" name="estimated_after" id="form_estimated_after" />
             <input type="hidden" name="estimated_quantity" id="form_estimated_quantity" />
+            <input type="hidden" name="pricing_variant" id="pricing_variant" />
 
             <div class="form__grid">
               <label class="field">
