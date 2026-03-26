@@ -1,304 +1,209 @@
-/* eslint-disable no-unused-vars */
-
-// ===== Utilities =====
 const currency = new Intl.NumberFormat("fr-BE", {
   style: "currency",
   currency: "EUR",
   maximumFractionDigits: 2,
 });
 
-function clampNumber(value, min, max) {
-  if (Number.isNaN(value)) return min;
-  return Math.min(max, Math.max(min, value));
-}
-
-function formatMoney(value) {
-  if (typeof value !== "number" || !Number.isFinite(value)) return "-";
-  return currency.format(value);
-}
-
-function getUTMParam(name) {
-  try {
-    const params = new URLSearchParams(window.location.search);
-    return params.get(name) || "";
-  } catch (e) {
-    return "";
-  }
-}
-
-// ===== Tracking UTM (Formspree hidden fields) =====
-(function initTrackingUTM() {
-  // Analytics: ces champs permettent de suivre la source du trafic vers Formspree.
-  const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
-  utmKeys.forEach((key) => {
-    const el = document.getElementById(key);
-    if (!el) return;
-    el.value = getUTMParam(key);
-  });
-})();
-
-// ===== Prix : simulateur =====
 const DISCOUNT_RATE = 0.5;
 
-// Tarifs constants (€/m2 ou règle panneaux).
-const PRICES_M2 = {
-  // TODO : à compléter dès que le tarif est confirmé.
-  ROOF_SIMPLE_EUR_PER_M2: null,
+const PRICES = {
+  ROOF_SIMPLE_EUR_PER_M2: 9.5,
   ROOF_DEMOSSAGE_EUR_PER_M2: 14,
   FACADES_CLEAN_EUR_PER_M2: 9.5,
   HYDROFUGE_EUR_PER_M2: 18,
   WINDOWS_EUR_PER_M2: 9,
 };
 
-const SIM = {
-  serviceEl: document.getElementById("sim-service"),
-  qtyRangeEl: document.getElementById("sim-quantity-range"),
-  qtyInputEl: document.getElementById("sim-quantity-input"),
-  qtyLabelEl: document.getElementById("sim-quantity-label"),
-  qtyUnitEl: document.getElementById("sim-quantity-unit"),
-  qtyHelpEl: document.getElementById("sim-quantity-help"),
-
-  priceBeforeEl: document.getElementById("price-before"),
-  discountEl: document.getElementById("discount-value"),
-  priceAfterEl: document.getElementById("price-after"),
-
-  estimatedServiceEl: document.getElementById("estimated-service"),
-  estimatedBeforeEl: document.getElementById("estimated-before"),
-  estimatedAfterEl: document.getElementById("estimated-after"),
-  estimatedQuantityEl: document.getElementById("estimated-quantity"),
-
-  form: document.getElementById("devis-form"),
-  formServiceEl: document.getElementById("form-service"),
-  formEstimatedServiceEl: document.getElementById("form_estimated_service"),
-  formEstimatedBeforeEl: document.getElementById("form_estimated_before"),
-  formEstimatedAfterEl: document.getElementById("form_estimated_after"),
-  formEstimatedQuantityEl: document.getElementById("form_estimated_quantity"),
-  formMessageEl: null,
+const CATEGORIES = {
+  roof: [
+    { key: "roof_simple", label: "Traitement toiture simple", unit: "m2", unitPrice: PRICES.ROOF_SIMPLE_EUR_PER_M2 },
+    { key: "roof_demossage", label: "Démoussage toiture", unit: "m2", unitPrice: PRICES.ROOF_DEMOSSAGE_EUR_PER_M2 },
+  ],
+  facade: [
+    { key: "facades_clean", label: "Nettoyage façade", unit: "m2", unitPrice: PRICES.FACADES_CLEAN_EUR_PER_M2 },
+    { key: "hydrofuge", label: "Traitement hydrofuge", unit: "m2", unitPrice: PRICES.HYDROFUGE_EUR_PER_M2 },
+  ],
+  panels: [{ key: "panels", label: "Nettoyage panneaux solaires", unit: "panels" }],
+  windows: [{ key: "windows", label: "Nettoyage vitres", unit: "m2", unitPrice: PRICES.WINDOWS_EUR_PER_M2 }],
 };
 
-const SERVICE_CONFIG = {
-  roof_simple: {
-    label: "Traitement toiture simple",
-    unit: "m2",
-    unitPrice: PRICES_M2.ROOF_SIMPLE_EUR_PER_M2,
-  },
-  roof_demossage: {
-    label: "Démoussage toiture",
-    unit: "m2",
-    unitPrice: PRICES_M2.ROOF_DEMOSSAGE_EUR_PER_M2,
-  },
-  facades_clean: {
-    label: "Nettoyage façades",
-    unit: "m2",
-    unitPrice: PRICES_M2.FACADES_CLEAN_EUR_PER_M2,
-  },
-  hydrofuge: {
-    label: "Traitement hydrofuge",
-    unit: "m2",
-    unitPrice: PRICES_M2.HYDROFUGE_EUR_PER_M2,
-  },
-  windows: {
-    label: "Vitres",
-    unit: "m2",
-    unitPrice: PRICES_M2.WINDOWS_EUR_PER_M2,
-  },
-  panels: {
-    label: "Panneaux solaires (nettoyage)",
-    unit: "panels",
-  },
+const FORM_SERVICE_MAP = {
+  roof_simple: "toiture",
+  roof_demossage: "toiture",
+  facades_clean: "facade",
+  hydrofuge: "facade",
+  panels: "panneaux",
+  windows: "vitres",
 };
 
-function panelsBasePrice(nbPanels) {
-  const panels = Math.max(0, nbPanels);
+const UI = {
+  categoryButtons: Array.from(document.querySelectorAll(".sim-cat-btn")),
+  servicesWrap: document.getElementById("sim-services"),
+  qtyRange: document.getElementById("sim-quantity-range"),
+  qtyLabel: document.getElementById("sim-quantity-label"),
+  qtyHelp: document.getElementById("sim-quantity-help"),
+  liveNumber: document.getElementById("sim-live-number"),
+  liveUnit: document.getElementById("sim-live-unit"),
+  priceBefore: document.getElementById("price-before"),
+  discountValue: document.getElementById("discount-value"),
+  priceAfter: document.getElementById("price-after"),
+  formService: document.getElementById("form-service"),
+  hiddenEstimatedService: document.getElementById("estimated-service"),
+  hiddenEstimatedBefore: document.getElementById("estimated-before"),
+  hiddenEstimatedAfter: document.getElementById("estimated-after"),
+  hiddenEstimatedQuantity: document.getElementById("estimated-quantity"),
+  formEstimatedService: document.getElementById("form_estimated_service"),
+  formEstimatedBefore: document.getElementById("form_estimated_before"),
+  formEstimatedAfter: document.getElementById("form_estimated_after"),
+  formEstimatedQuantity: document.getElementById("form_estimated_quantity"),
+};
 
-  // Règles fournies :
-  // - Moins de 50 panneaux : plancher 150 €, 6,00 €/panneau
-  // - Entre 50 et 500 panneaux : plancher 150 €, 5,50 €/panneau
-  // - Plus de 500 panneaux : pas de prix plancher, 5,00 €/panneau
-  if (panels < 50) {
-    const floor = 150;
-    const unit = 6.0;
-    return Math.max(floor, panels * unit);
-  }
+let selectedCategory = "roof";
+let selectedService = CATEGORIES.roof[0];
 
-  if (panels <= 500) {
-    const floor = 150;
-    const unit = 5.5;
-    return Math.max(floor, panels * unit);
-  }
-
-  const unit = 5.0;
-  return panels * unit;
+function formatMoney(value) {
+  if (!Number.isFinite(value)) return "-";
+  return currency.format(value);
 }
 
-function setQuantityUI(unitType) {
-  const unitTypeSafe = unitType === "panels" ? "panels" : "m2";
+function clamp(value, min, max) {
+  if (!Number.isFinite(value)) return min;
+  return Math.min(max, Math.max(min, value));
+}
 
-  if (unitTypeSafe === "panels") {
-    SIM.qtyLabelEl.textContent = "Nombre de panneaux";
-    SIM.qtyUnitEl.textContent = "panneaux";
-    SIM.qtyHelpEl.textContent = "Règles de prix selon le nombre de panneaux.";
-    SIM.qtyRangeEl.min = "1";
-    SIM.qtyRangeEl.max = "2000";
-    SIM.qtyRangeEl.step = "1";
-    SIM.qtyInputEl.min = "1";
-    SIM.qtyInputEl.max = "100000";
-    SIM.qtyInputEl.step = "1";
+function setHidden(el, value) {
+  if (el) el.value = value == null ? "" : String(value);
+}
 
-    // Valeur par défaut dans une zone plausible
-    SIM.qtyRangeEl.value = SIM.qtyRangeEl.value && Number(SIM.qtyRangeEl.value) >= 1 ? SIM.qtyRangeEl.value : 20;
-    SIM.qtyInputEl.value = SIM.qtyRangeEl.value;
+function setFormService(serviceKey) {
+  if (UI.formService) UI.formService.value = FORM_SERVICE_MAP[serviceKey] || "";
+}
+
+function panelsBasePrice(count) {
+  const qty = Math.max(0, count);
+  if (qty < 50) return Math.max(150, qty * 6.0);
+  if (qty <= 500) return Math.max(150, qty * 5.5);
+  return qty * 5.0;
+}
+
+function updateRangeUI(unit) {
+  if (unit === "panels") {
+    UI.qtyLabel.textContent = "3. Nombre de panneaux";
+    UI.liveUnit.textContent = "panneaux";
+    UI.qtyHelp.textContent = "Le plancher est appliqué automatiquement.";
+    UI.qtyRange.min = "1";
+    UI.qtyRange.max = "2000";
+    UI.qtyRange.step = "1";
+    UI.qtyRange.value = "20";
   } else {
-    SIM.qtyLabelEl.textContent = "Surface (m2)";
-    SIM.qtyUnitEl.textContent = "m2";
-    SIM.qtyHelpEl.textContent = "Ajustez selon votre surface.";
-    SIM.qtyRangeEl.min = "10";
-    SIM.qtyRangeEl.max = "500";
-    SIM.qtyRangeEl.step = "1";
-    SIM.qtyInputEl.min = "1";
-    SIM.qtyInputEl.max = "10000";
-    SIM.qtyInputEl.step = "1";
-
-    SIM.qtyRangeEl.value = SIM.qtyRangeEl.value && Number(SIM.qtyRangeEl.value) >= 10 ? SIM.qtyRangeEl.value : 100;
-    SIM.qtyInputEl.value = SIM.qtyRangeEl.value;
+    UI.qtyLabel.textContent = "3. Surface (m2)";
+    UI.liveUnit.textContent = "m2";
+    UI.qtyHelp.textContent = "Ajustez selon la surface estimée.";
+    UI.qtyRange.min = "10";
+    UI.qtyRange.max = "500";
+    UI.qtyRange.step = "1";
+    UI.qtyRange.value = "100";
   }
 }
 
-function getSelectedServiceKey() {
-  return SIM.serviceEl ? SIM.serviceEl.value : "roof_demossage";
+function renderServiceButtons() {
+  UI.servicesWrap.innerHTML = "";
+  const services = CATEGORIES[selectedCategory] || [];
+  services.forEach((service, idx) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "sim-service-btn" + (idx === 0 ? " is-active" : "");
+    button.textContent = service.label;
+    button.addEventListener("click", () => {
+      selectedService = service;
+      Array.from(UI.servicesWrap.querySelectorAll(".sim-service-btn")).forEach((b) => b.classList.remove("is-active"));
+      button.classList.add("is-active");
+      updateRangeUI(service.unit);
+      compute();
+    });
+    UI.servicesWrap.appendChild(button);
+  });
+  selectedService = services[0];
 }
 
-function getQuantityValue() {
-  const raw = SIM.qtyInputEl ? Number(SIM.qtyInputEl.value) : Number(SIM.qtyRangeEl.value);
-  return clampNumber(raw, Number(SIM.qtyInputEl.min), Number(SIM.qtyInputEl.max));
-}
+function compute() {
+  if (!selectedService) return;
 
-function computeAndRender() {
-  const serviceKey = getSelectedServiceKey();
-  const cfg = SERVICE_CONFIG[serviceKey];
-  if (!cfg) return;
+  const qty = clamp(Number(UI.qtyRange.value), Number(UI.qtyRange.min), Number(UI.qtyRange.max));
+  UI.liveNumber.textContent = String(qty);
 
-  const quantity = getQuantityValue();
-  const unit = cfg.unit;
+  let before = null;
+  if (selectedService.unit === "panels") before = panelsBasePrice(qty);
+  else if (typeof selectedService.unitPrice === "number") before = qty * selectedService.unitPrice;
 
-  const before = (() => {
-    if (unit === "panels") return panelsBasePrice(quantity);
-    if (unit === "m2") {
-      if (typeof cfg.unitPrice !== "number") return null; // TODO : prix non défini
-      return quantity * cfg.unitPrice;
-    }
-    return null;
-  })();
-
-  if (before === null) {
-    SIM.priceBeforeEl.textContent = "Tarif à définir";
-    SIM.discountEl.textContent = "-";
-    SIM.priceAfterEl.textContent = "-";
-
-    // Champs analytics (côté landing)
-    setHiddenIfPresent(SIM.estimatedServiceEl, cfg.label);
-    setHiddenIfPresent(SIM.estimatedBeforeEl, "");
-    setHiddenIfPresent(SIM.estimatedAfterEl, "");
-    setHiddenIfPresent(SIM.estimatedQuantityEl, quantity.toString());
-
-    // Champs analytics (dans le formulaire)
-    setHiddenIfPresent(SIM.formEstimatedServiceEl, cfg.label);
-    setHiddenIfPresent(SIM.formEstimatedBeforeEl, "");
-    setHiddenIfPresent(SIM.formEstimatedAfterEl, "");
-    setHiddenIfPresent(SIM.formEstimatedQuantityEl, quantity.toString());
+  if (before == null) {
+    UI.priceBefore.textContent = "Tarif à définir";
+    UI.discountValue.textContent = "-";
+    UI.priceAfter.textContent = "-";
+    setHidden(UI.hiddenEstimatedService, selectedService.label);
+    setHidden(UI.hiddenEstimatedBefore, "");
+    setHidden(UI.hiddenEstimatedAfter, "");
+    setHidden(UI.hiddenEstimatedQuantity, qty);
+    setHidden(UI.formEstimatedService, selectedService.label);
+    setHidden(UI.formEstimatedBefore, "");
+    setHidden(UI.formEstimatedAfter, "");
+    setHidden(UI.formEstimatedQuantity, qty);
     return;
   }
 
   const discount = before * DISCOUNT_RATE;
   const after = before - discount;
 
-  SIM.priceBeforeEl.textContent = formatMoney(before);
-  SIM.discountEl.textContent = "-" + formatMoney(discount);
-  SIM.priceAfterEl.textContent = formatMoney(after);
+  UI.priceBefore.textContent = formatMoney(before);
+  UI.discountValue.textContent = "-" + formatMoney(discount);
+  UI.priceAfter.textContent = formatMoney(after);
 
-  // Champs analytics (côté landing)
-  setHiddenIfPresent(SIM.estimatedServiceEl, cfg.label);
-  setHiddenIfPresent(SIM.estimatedBeforeEl, before.toFixed(2));
-  setHiddenIfPresent(SIM.estimatedAfterEl, after.toFixed(2));
-  setHiddenIfPresent(SIM.estimatedQuantityEl, quantity.toString());
-
-  // Champs analytics (dans le formulaire)
-  setHiddenIfPresent(SIM.formEstimatedServiceEl, cfg.label);
-  setHiddenIfPresent(SIM.formEstimatedBeforeEl, before.toFixed(2));
-  setHiddenIfPresent(SIM.formEstimatedAfterEl, after.toFixed(2));
-  setHiddenIfPresent(SIM.formEstimatedQuantityEl, quantity.toString());
+  setHidden(UI.hiddenEstimatedService, selectedService.label);
+  setHidden(UI.hiddenEstimatedBefore, before.toFixed(2));
+  setHidden(UI.hiddenEstimatedAfter, after.toFixed(2));
+  setHidden(UI.hiddenEstimatedQuantity, qty);
+  setHidden(UI.formEstimatedService, selectedService.label);
+  setHidden(UI.formEstimatedBefore, before.toFixed(2));
+  setHidden(UI.formEstimatedAfter, after.toFixed(2));
+  setHidden(UI.formEstimatedQuantity, qty);
+  setFormService(selectedService.key);
 }
 
-function setHiddenIfPresent(el, value) {
-  if (!el) return;
-  el.value = value == null ? "" : value;
+function initUTM() {
+  const params = new URLSearchParams(window.location.search);
+  ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach((key) => {
+    const el = document.getElementById(key);
+    if (el) el.value = params.get(key) || "";
+  });
 }
 
-function setFormServiceFromSim(serviceKey) {
-  const mapping = {
-    roof_simple: "toiture",
-    roof_demossage: "toiture",
-    facades_clean: "facade",
-    hydrofuge: "facade",
-    windows: "vitres",
-    panels: "panneaux",
-  };
-
-  if (!SIM.formServiceEl) return;
-  const value = mapping[serviceKey] || "";
-  SIM.formServiceEl.value = value;
-}
-
-// Synchroniser range <-> input + recalcul
-function syncQuantityFromRange() {
-  if (!SIM.qtyRangeEl || !SIM.qtyInputEl) return;
-  SIM.qtyInputEl.value = SIM.qtyRangeEl.value;
-  computeAndRender();
-}
-
-function syncQuantityFromInput() {
-  if (!SIM.qtyRangeEl || !SIM.qtyInputEl) return;
-  const min = Number(SIM.qtyRangeEl.min);
-  const max = Number(SIM.qtyRangeEl.max);
-  const step = Number(SIM.qtyRangeEl.step || 1);
-
-  let value = Number(SIM.qtyInputEl.value);
-  if (!Number.isFinite(value)) value = min;
-  value = clampNumber(value, min, max);
-
-  // Arrondi à l'incrément du slider
-  const stepped = Math.round(value / step) * step;
-  SIM.qtyRangeEl.value = String(clampNumber(stepped, min, max));
-  SIM.qtyInputEl.value = SIM.qtyRangeEl.value;
-  computeAndRender();
-}
-
-// Init simulateur
 function initSimulator() {
-  if (!SIM.serviceEl || !SIM.qtyRangeEl || !SIM.qtyInputEl) return;
+  if (!UI.servicesWrap || !UI.qtyRange) return;
 
-  // Appeler une fois pour config UI
-  const serviceKey = getSelectedServiceKey();
-  const cfg = SERVICE_CONFIG[serviceKey];
-  setQuantityUI(cfg.unit);
-  setFormServiceFromSim(serviceKey);
-  computeAndRender();
-
-  SIM.serviceEl.addEventListener("change", () => {
-    const key = getSelectedServiceKey();
-    const config = SERVICE_CONFIG[key];
-    if (config) setQuantityUI(config.unit);
-    setFormServiceFromSim(key);
-    computeAndRender();
+  UI.categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedCategory = button.dataset.category;
+      UI.categoryButtons.forEach((b) => b.classList.toggle("is-active", b === button));
+      renderServiceButtons();
+      updateRangeUI(selectedService.unit);
+      compute();
+    });
   });
 
-  SIM.qtyRangeEl.addEventListener("input", syncQuantityFromRange);
-  SIM.qtyInputEl.addEventListener("input", syncQuantityFromInput);
+  UI.qtyRange.addEventListener("input", compute);
+
+  // Etat initial
+  UI.categoryButtons.forEach((b) => b.classList.toggle("is-active", b.dataset.category === selectedCategory));
+  renderServiceButtons();
+  updateRangeUI(selectedService.unit);
+  compute();
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initSimulator);
-} else {
+function init() {
+  initUTM();
   initSimulator();
 }
+
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+else init();
 

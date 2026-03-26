@@ -24,7 +24,19 @@
     <header class="header">
       <div class="container header__inner">
         <a class="brand" href="#top" aria-label="Prop'Air">
-          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 28 28" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1.5" y="1.5" width="25" height="25" rx="8" fill="url(#logo-grad)" stroke="rgba(255,255,255,0.35)" />
+              <path d="M14 6.8v2.4M14 18.8v2.4M8.4 10.2l1.7 1.7M17.9 15.7l1.7 1.7M6.8 14h2.4M18.8 14h2.4M8.4 17.8l1.7-1.7M17.9 12.3l1.7-1.7" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round"/>
+              <circle cx="14" cy="14" r="3.2" fill="#FFB020"/>
+              <defs>
+                <linearGradient id="logo-grad" x1="2" y1="2" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#2B7BC5"/>
+                  <stop offset="1" stop-color="#0A2F57"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
           <span class="brand__name">Prop'Air</span>
         </a>
 
@@ -37,278 +49,272 @@
     </header>
 
     <main id="top">
-      <!-- HERO -->
       <section class="hero">
         <div class="container hero__grid">
           <div class="hero__content">
-            <div class="badge badge--soft">
-              <span class="badge__dot" aria-hidden="true"></span>
-              Disponible dès mi-avril
+            <div class="hero__badgeRow">
+              <div class="badge-offer" aria-label="Offre de lancement -50 pour cent">Offre de lancement <strong>-50%</strong></div>
+              <div class="badge-soft" aria-label="Disponibilité">Disponible dès mi-avril</div>
             </div>
 
-            <h1 class="hero__title">Nettoyage extérieur par drone</h1>
-            <p class="hero__subtitle">
-              L'été approche : c'est le bon moment pour entretenir vos extérieurs.
-              Nettoyer toiture, façades, vitres et panneaux solaires : des panneaux propres captent mieux l'énergie disponible.
-            </p>
-
-            <div class="hero__offer" aria-label="Offre de lancement">
-              <span class="hero__offerLabel">Offre de lancement</span>
-              <span class="hero__offerValue">-50%</span>
-            </div>
+            <h1 class="hero__title">Nettoyage extérieur par drone, simple et rapide.</h1>
+            <p class="hero__subtitle">Une nouvelle manière de nettoyer son extérieur : plus simple, plus rapide, plus concrète.</p>
+            <p class="hero__subtitle">L'été approche. Toiture, façade, vitres et panneaux solaires : c'est le bon moment.</p>
 
             <div class="hero__cta">
-              <a class="btn btn--primary" href="#devis">Demander un devis gratuit</a>
-              <a class="btn btn--ghost" href="#simulateur">Estimer mon prix</a>
+              <a class="btn btn--primary btn--cta btn--full" href="#devis">Demander un devis gratuit</a>
+              <a class="btn btn--ghost btn--full hero__secondary-btn" href="#simulateur">Estimer mon prix</a>
             </div>
 
-            <div class="hero__note">
-              <div class="mini-badges" role="list" aria-label="Points de réassurance">
-                <div class="mini-badge" role="listitem">Sans échafaudage</div>
-                <div class="mini-badge" role="listitem">Intervention rapide</div>
-                <div class="mini-badge" role="listitem">Approche plus écologique</div>
-                <div class="mini-badge" role="listitem">Opérateur au sol</div>
-              </div>
-            </div>
+            <p class="hero__solvay">Projet initié à la Solvay Business School, aujourd'hui en lancement réel.</p>
           </div>
 
-          <div class="hero__panel" aria-hidden="true">
-            <div class="hero-card">
-              <div class="hero-card__top">
-                <div class="hero-card__tag">Bruxelles & alentours</div>
-                <div class="hero-card__chip">
-                  <span class="hero-card__chipDot" aria-hidden="true"></span>
-                  Prop'Air est en lancement
+          <div class="hero__visual" aria-hidden="true">
+            <div class="hero__visualCard">
+              <svg class="hero__drone" viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="g1" x1="60" y1="30" x2="480" y2="330" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#2B7BC5" stop-opacity="0.95" />
+                    <stop offset="1" stop-color="#0A2F57" stop-opacity="0.95" />
+                  </linearGradient>
+                  <linearGradient id="g2" x1="150" y1="70" x2="380" y2="290" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FFB020" stop-opacity="0.95" />
+                    <stop offset="1" stop-color="#F59E0B" stop-opacity="0.95" />
+                  </linearGradient>
+                </defs>
+                <path d="M140 190c0-46 38-84 84-84h72c46 0 84 38 84 84v18c0 14-11 25-25 25H165c-14 0-25-11-25-25v-18z" fill="url(#g1)" fill-opacity="0.12"/>
+                <path d="M195 168h130" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
+                <path d="M165 205c16 16 43 26 95 26s79-10 95-26" stroke="url(#g1)" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+                <path d="M130 205l-25 0c-10 0-18 8-18 18v0c0 10 8 18 18 18h25" stroke="url(#g1)" stroke-width="12" stroke-linecap="round" opacity="0.85"/>
+                <path d="M390 205h25c10 0 18 8 18 18v0c0 10-8 18-18 18h-25" stroke="url(#g1)" stroke-width="12" stroke-linecap="round" opacity="0.85"/>
+                <path d="M175 140l-35-45" stroke="url(#g2)" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+                <path d="M345 140l35-45" stroke="url(#g2)" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+                <circle cx="152" cy="118" r="16" fill="url(#g2)" fill-opacity="0.9"/>
+                <circle cx="368" cy="118" r="16" fill="url(#g2)" fill-opacity="0.9"/>
+                <g opacity="0.95">
+                  <path d="M260 80c-18 0-32 14-32 32s14 32 32 32 32-14 32-32-14-32-32-32z" fill="#0A2F57" fill-opacity="0.08"/>
+                  <path d="M260 96c-10 0-18 8-18 18s8 18 18 18 18-8 18-18-8-18-18-18z" fill="url(#g1)"/>
+                </g>
+                <path d="M190 240h140c10 0 18 8 18 18v0c0 10-8 18-18 18H190c-10 0-18-8-18-18v0c0-10 8-18 18-18z" fill="#EDF5FF" fill-opacity="0.55"/>
+              </svg>
+
+              <div class="hero__visualChips">
+                <div class="chip">
+                  <span class="chip__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 10.5 12 3l9 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M5.5 10.5V21h13V10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  Toitures
+                </div>
+                <div class="chip">
+                  <span class="chip__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 20V10l6-6 6 6v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10 20v-6h4v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  Façades
+                </div>
+                <div class="chip">
+                  <span class="chip__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M12 19v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M4.2 4.2 6.3 6.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M17.7 17.7 19.8 19.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M2 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M4.2 19.8 6.3 17.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M17.7 6.3 19.8 4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  </span>
+                  Panneaux
+                </div>
+                <div class="chip">
+                  <span class="chip__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4 3h16v18H4V3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                      <path d="M9 9h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M9 13h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  Vitres
                 </div>
               </div>
-              <div class="hero-card__list" role="list">
-                <div class="hero-card__item" role="listitem">Toitures</div>
-                <div class="hero-card__item" role="listitem">Façades</div>
-                <div class="hero-card__item" role="listitem">Panneaux solaires (nettoyage)</div>
-                <div class="hero-card__item" role="listitem">Vitres</div>
-              </div>
-              <div class="hero-card__divider"></div>
-              <div class="hero-card__fineprint">
-                Devis rapide. On vous recontacte sous 24h.
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- A PROPOS -->
-      <section class="section" id="apropos">
+      <section class="section section--solvay" id="apropos">
         <div class="container">
-          <div class="section__head">
-            <h2>À propos</h2>
-          </div>
-          <p class="lead">
-            Prop'Air a démarré dans un cadre universitaire à la Solvay Business School.
-            Le projet est désormais en cours de lancement réel, avec une disponibilité à partir de mi-avril.
-          </p>
-        </div>
-      </section>
-
-      <!-- SERVICES -->
-      <section class="section section--alt" id="services">
-        <div class="container">
-          <div class="section__head">
-            <h2>Services</h2>
-            <p class="section__subtitle">Choisissez votre surface. On s'occupe du reste.</p>
-          </div>
-
-          <div class="cards cards--4">
-            <article class="card">
-              <h3>Toitures</h3>
-              <p>Traitement et démoussage.</p>
-            </article>
-            <article class="card">
-              <h3>Façades</h3>
-              <p>Nettoyage et finition.</p>
-            </article>
-            <article class="card">
-              <h3>Panneaux solaires</h3>
-              <p>Uniquement nettoyage.</p>
-            </article>
-            <article class="card">
-              <h3>Vitres</h3>
-              <p>Nettoyage extérieur.</p>
-            </article>
+          <div class="solvay-card2">
+            <div class="solvay-card2__kicker">Solvay -> lancement réel</div>
+            <p class="solvay-card2__text">
+              Dans le cadre d'un projet universitaire à la Solvay Business School, nous avons étudié une nouvelle manière d'entretenir les extérieurs.
+            </p>
+            <p class="solvay-card2__sub">
+              Ce travail a permis de développer une approche plus simple et plus légère, basée sur l'utilisation de drones. Aujourd'hui, le projet passe en phase réelle avec un lancement prévu début avril.
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- POURQUOI MAINTENANT -->
-      <section class="section" id="pourquoi">
+      <section class="section section--services" id="services">
         <div class="container">
-          <div class="section__head">
-            <h2>Pourquoi maintenant ?</h2>
-          </div>
-          <div class="why-grid">
-            <div class="why-item">
-              <div class="why-item__title">L'été approche</div>
-              <div class="why-item__text">Un extérieur prêt, c'est plus agréable au quotidien.</div>
+          <h2 class="section-title">Services</h2>
+          <div class="service-list">
+            <div class="service-item">
+              <span class="service-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 10.5 12 3l9 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5.5 10.5V21h13V10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>Toitures</span>
             </div>
-            <div class="why-item">
-              <div class="why-item__title">Plus de visibilité</div>
-              <div class="why-item__text">Un bâtiment propre améliore immédiatement son aspect.</div>
+            <div class="service-item">
+              <span class="service-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 20V10l6-6 6 6v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 20v-6h4v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>Façades</span>
             </div>
-            <div class="why-item">
-              <div class="why-item__title">Panneaux prêts</div>
-              <div class="why-item__text">Des panneaux propres captent mieux l'énergie disponible.</div>
+            <div class="service-item">
+              <span class="service-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M12 19v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M4.2 4.2 6.3 6.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M17.7 17.7 19.8 19.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M2 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M4.2 19.8 6.3 17.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M17.7 6.3 19.8 4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </span>
+              <span>Panneaux solaires (nettoyage)</span>
             </div>
-            <div class="why-item">
-              <div class="why-item__title">Le bon timing</div>
-              <div class="why-item__text">Demandez un devis : on vous recontacte sous 24h.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- COMPARAISON -->
-      <section class="section section--alt" id="comparaison">
-        <div class="container">
-          <div class="section__head">
-            <h2>Comparaison</h2>
-            <p class="section__subtitle">Une méthode plus légère, quand c'est possible.</p>
-          </div>
-
-          <div class="compare-table" role="table" aria-label="Comparaison Prop'Air vs méthode traditionnelle">
-            <div class="compare-table__head" role="row">
-              <div class="compare-table__th" role="columnheader">Critère</div>
-              <div class="compare-table__th" role="columnheader">Prop'Air</div>
-              <div class="compare-table__th" role="columnheader">Traditionnel</div>
-            </div>
-
-            <div class="compare-table__row" role="row">
-              <div class="compare-table__criterion" role="cell">Mise en place</div>
-              <div class="compare-table__value compare-table__value--prop" role="cell">Mise en place plus simple</div>
-              <div class="compare-table__value compare-table__value--trad" role="cell">Peut nécessiter plus de matériel</div>
-            </div>
-
-            <div class="compare-table__row" role="row">
-              <div class="compare-table__criterion" role="cell">Échafaudage</div>
-              <div class="compare-table__value compare-table__value--prop" role="cell">Sans échafaudage dans de nombreux cas</div>
-              <div class="compare-table__value compare-table__value--trad" role="cell">Installation plus lourde</div>
-            </div>
-
-            <div class="compare-table__row" role="row">
-              <div class="compare-table__criterion" role="cell">Sécurité</div>
-              <div class="compare-table__value compare-table__value--prop" role="cell">Opérateur au sol</div>
-              <div class="compare-table__value compare-table__value--trad" role="cell">Présence humaine en hauteur</div>
-            </div>
-
-            <div class="compare-table__row" role="row">
-              <div class="compare-table__criterion" role="cell">Rapidité</div>
-              <div class="compare-table__value compare-table__value--prop" role="cell">Intervention plus légère</div>
-              <div class="compare-table__value compare-table__value--trad" role="cell">Intervention plus contraignante</div>
-            </div>
-
-            <div class="compare-table__row" role="row">
-              <div class="compare-table__criterion" role="cell">Impact environnemental</div>
-              <div class="compare-table__value compare-table__value--prop" role="cell">Approche plus écologique</div>
-              <div class="compare-table__value compare-table__value--trad" role="cell">Moins léger sur l'environnement</div>
+            <div class="service-item">
+              <span class="service-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 3h16v18H4V3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M9 9h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M9 13h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span>Vitres</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- OFFRE DE LANCEMENT -->
-      <section class="section" id="offre">
+      <section class="section section--compare" id="comparaison">
         <div class="container">
-          <div class="offer-strip">
-            <div class="offer-strip__left">
-              <div class="offer-strip__title">Offre de lancement</div>
-              <div class="offer-strip__value">-50%</div>
+          <h2 class="section-title">Une approche plus simple que les méthodes traditionnelles</h2>
+          <div class="compare-simple">
+            <div class="compare-simple__col compare-simple__col--prop">
+              <h3>Prop'Air</h3>
+              <ul>
+                <li><span class="compare-icon" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M7.8 14.2 2.9 9.3l1.4-1.4 3.5 3.5 8.1-8.1 1.4 1.4z" fill="currentColor"/></svg></span> Mise en place plus simple</li>
+                <li><span class="compare-icon" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M7.8 14.2 2.9 9.3l1.4-1.4 3.5 3.5 8.1-8.1 1.4 1.4z" fill="currentColor"/></svg></span> Pas d'échafaudage</li>
+                <li><span class="compare-icon" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M7.8 14.2 2.9 9.3l1.4-1.4 3.5 3.5 8.1-8.1 1.4 1.4z" fill="currentColor"/></svg></span> Intervention en quelques heures</li>
+                <li><span class="compare-icon" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M7.8 14.2 2.9 9.3l1.4-1.4 3.5 3.5 8.1-8.1 1.4 1.4z" fill="currentColor"/></svg></span> Opérateur au sol</li>
+                <li><span class="compare-icon" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M7.8 14.2 2.9 9.3l1.4-1.4 3.5 3.5 8.1-8.1 1.4 1.4z" fill="currentColor"/></svg></span> Peu ou pas de produits chimiques</li>
+                <li><span class="compare-icon" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M7.8 14.2 2.9 9.3l1.4-1.4 3.5 3.5 8.1-8.1 1.4 1.4z" fill="currentColor"/></svg></span> Approche plus écologique</li>
+              </ul>
             </div>
-            <div class="offer-strip__right">
-              Pour les premiers clients, simplement et sans complication.
+            <div class="compare-simple__col">
+              <h3>Méthode classique</h3>
+              <ul>
+                <li><span class="compare-icon compare-icon--muted" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M6.2 5.1 5.1 6.2l3.9 3.9-3.9 3.9 1.1 1.1 3.9-3.9 3.9 3.9 1.1-1.1-3.9-3.9 3.9-3.9-1.1-1.1-3.9 3.9z" fill="currentColor"/></svg></span> Installation plus lourde</li>
+                <li><span class="compare-icon compare-icon--muted" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M6.2 5.1 5.1 6.2l3.9 3.9-3.9 3.9 1.1 1.1 3.9-3.9 3.9 3.9 1.1-1.1-3.9-3.9 3.9-3.9-1.1-1.1-3.9 3.9z" fill="currentColor"/></svg></span> Échafaudage fréquent</li>
+                <li><span class="compare-icon compare-icon--muted" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M6.2 5.1 5.1 6.2l3.9 3.9-3.9 3.9 1.1 1.1 3.9-3.9 3.9 3.9 1.1-1.1-3.9-3.9 3.9-3.9-1.1-1.1-3.9 3.9z" fill="currentColor"/></svg></span> Intervention plus longue</li>
+                <li><span class="compare-icon compare-icon--muted" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M6.2 5.1 5.1 6.2l3.9 3.9-3.9 3.9 1.1 1.1 3.9-3.9 3.9 3.9 1.1-1.1-3.9-3.9 3.9-3.9-1.1-1.1-3.9 3.9z" fill="currentColor"/></svg></span> Travail en hauteur</li>
+                <li><span class="compare-icon compare-icon--muted" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M6.2 5.1 5.1 6.2l3.9 3.9-3.9 3.9 1.1 1.1 3.9-3.9 3.9 3.9 1.1-1.1-3.9-3.9 3.9-3.9-1.1-1.1-3.9 3.9z" fill="currentColor"/></svg></span> Produits plus classiques</li>
+                <li><span class="compare-icon compare-icon--muted" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14"><path d="M6.2 5.1 5.1 6.2l3.9 3.9-3.9 3.9 1.1 1.1 3.9-3.9 3.9 3.9 1.1-1.1-3.9-3.9 3.9-3.9-1.1-1.1-3.9 3.9z" fill="currentColor"/></svg></span> Plus de contraintes</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SIMULATEUR -->
-      <section class="section section--alt" id="simulateur">
+      <section class="section section--sim" id="simulateur">
         <div class="container">
-          <div class="section__head">
-            <h2>Simulateur de prix</h2>
-            <p class="section__subtitle">Estimation indicative, devis final après validation.</p>
-          </div>
+          <h2 class="section-title">Estimation rapide</h2>
 
           <div class="sim">
             <div class="sim__controls">
-              <label class="field">
-                <span class="field__label">Type de prestation</span>
-                <select id="sim-service" class="field__control" aria-label="Sélectionner un service">
-                  <option value="roof_simple">Traitement toiture simple</option>
-                  <option value="roof_demossage">Démoussage toiture</option>
-                  <option value="facades_clean">Nettoyage façades</option>
-                  <option value="hydrofuge">Traitement hydrofuge</option>
-                  <option value="windows">Vitres</option>
-                  <option value="panels">Panneaux solaires (nettoyage)</option>
-                </select>
-              </label>
-
-              <div class="field field--range" id="sim-quantity-wrap">
-                <span class="field__label" id="sim-quantity-label">Surface (m2)</span>
-                <div class="range-row">
-                  <input
-                    id="sim-quantity-range"
-                    type="range"
-                    min="10"
-                    max="500"
-                    value="100"
-                    step="1"
-                    aria-label="Quantité"
-                  />
-                  <div class="range-value">
-                    <input
-                      id="sim-quantity-input"
-                      class="range-value__input"
-                      type="number"
-                      min="1"
-                      max="10000"
-                      value="100"
-                      step="1"
-                      inputmode="numeric"
-                      aria-label="Saisir la quantité"
-                    />
-                    <span class="range-value__unit" id="sim-quantity-unit">m2</span>
-                  </div>
+              <div class="sim-step">
+                <p class="sim-step__label">1. Choisissez votre surface</p>
+                <div class="sim-categories" id="sim-categories">
+                  <button type="button" class="sim-cat-btn" data-category="roof" aria-label="Toiture">
+                    <span class="sim-cat-btn__ico" aria-hidden="true">⌂</span>
+                    <span>Toiture</span>
+                  </button>
+                  <button type="button" class="sim-cat-btn" data-category="facade" aria-label="Façade">
+                    <span class="sim-cat-btn__ico" aria-hidden="true">▦</span>
+                    <span>Façade</span>
+                  </button>
+                  <button type="button" class="sim-cat-btn" data-category="panels" aria-label="Panneaux solaires">
+                    <span class="sim-cat-btn__ico" aria-hidden="true">☀</span>
+                    <span>Panneaux solaires</span>
+                  </button>
+                  <button type="button" class="sim-cat-btn" data-category="windows" aria-label="Vitres">
+                    <span class="sim-cat-btn__ico" aria-hidden="true">▢</span>
+                    <span>Vitres</span>
+                  </button>
                 </div>
-                <div class="field__help" id="sim-quantity-help">Ajustez selon votre surface.</div>
+              </div>
+
+              <div class="sim-step">
+                <p class="sim-step__label">2. Choisissez la prestation</p>
+                <div class="sim-services" id="sim-services"></div>
+              </div>
+
+              <div class="sim-step">
+                <div class="field field--range">
+                  <span class="field__label" id="sim-quantity-label">3. Entrez la quantité</span>
+                  <div class="sim-live-value">
+                    <span id="sim-live-number">100</span>
+                    <small id="sim-live-unit">m2</small>
+                  </div>
+                  <div class="range-row">
+                    <input id="sim-quantity-range" type="range" min="10" max="500" value="100" step="1" aria-label="Quantité" />
+                  </div>
+                  <div class="field__help" id="sim-quantity-help">Ajustez selon votre besoin.</div>
+                </div>
               </div>
             </div>
 
             <div class="sim__result" aria-live="polite">
               <div class="result-grid">
-                <div class="result-card">
-                  <div class="result-card__label">Prix estimé</div>
-                  <div class="result-card__value" id="price-before">-</div>
-                </div>
-                <div class="result-card result-card--accent">
-                  <div class="result-card__label">Réduction -50%</div>
-                  <div class="result-card__value" id="discount-value">-</div>
-                </div>
-                <div class="result-card">
-                  <div class="result-card__label">Prix promo</div>
+                <div class="result-card result-card--promo">
+                  <div class="result-card__label">Prix promo estimé</div>
                   <div class="result-card__value" id="price-after">-</div>
                 </div>
+                <div class="result-card result-card--accent">
+                  <div class="result-card__label">Réduction lancement -50%</div>
+                  <div class="result-card__value" id="discount-value">-</div>
+                </div>
+                <div class="result-card result-card--quiet">
+                  <div class="result-card__label">Prix initial estimé</div>
+                  <div class="result-card__value" id="price-before">-</div>
+                </div>
               </div>
-
-              <div class="sim__fineprint">
-                <span class="sim__pill">Estimation indicative</span>
-                <span class="sim__pill">Devis final après validation</span>
-              </div>
-
+              <p class="sim__note">Estimation indicative, devis final après validation.</p>
               <div class="sim__cta">
-                <a class="btn btn--primary" href="#devis">Demander mon devis</a>
+                <a class="btn btn--primary btn--cta btn--full" href="#devis">Demander mon devis</a>
               </div>
             </div>
           </div>
 
-          <!-- Champs cachés pour analytics côté landing -->
           <div class="sr-only" aria-hidden="true">
             <input type="hidden" id="estimated-service" />
             <input type="hidden" id="estimated-before" />
@@ -321,10 +327,8 @@
       <!-- FORMULAIRE DEVIS -->
       <section class="section" id="devis">
         <div class="container">
-          <div class="section__head">
-            <h2>Demander un devis</h2>
-            <p class="section__subtitle">Devis gratuit, sans engagement. On vous recontacte sous 24h.</p>
-          </div>
+          <h2 class="section-title">Demander un devis</h2>
+          <p class="section-subtitle">Devis gratuit, sans engagement. Réponse sous 24h.</p>
 
           <form
             id="devis-form"
@@ -390,7 +394,7 @@
             </div>
 
             <div class="form__cta">
-              <button class="btn btn--primary" type="submit">Demander mon devis</button>
+              <button class="btn btn--primary btn--cta btn--full" type="submit">Demander mon devis gratuit</button>
               <p class="form__fineprint">Devis gratuit, sans engagement.</p>
             </div>
 
