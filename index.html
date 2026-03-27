@@ -6,6 +6,15 @@
     <meta name="description" content="Prop'Air : nettoyage extérieur par drone. Toitures, façades, panneaux solaires (nettoyage) et vitres. Demandez un devis gratuit." />
     <title>Prop'Air | Nettoyage extérieur par drone</title>
     <link rel="stylesheet" href="./style.css" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X64SE85GWP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-X64SE85GWP');
+    </script>
   </head>
   <body>
     <!-- Bandeau offre de lancement -->
@@ -15,7 +24,7 @@
           <span class="top-offer__label" id="top-offer-label">Offre de lancement :</span>
           <strong class="top-offer__value" id="top-offer-value">-50%</strong>
         </div>
-        <a class="btn btn--sm btn--accent" href="#devis" aria-label="Demander un devis">
+        <a class="btn btn--sm btn--accent quote-btn" href="#devis" aria-label="Demander un devis">
           Demander un devis
         </a>
       </div>
@@ -62,7 +71,7 @@
             <p class="hero__subtitle">L'été approche. Toiture, façade, vitres et panneaux solaires : c'est le bon moment.</p>
 
             <div class="hero__cta">
-              <a class="btn btn--primary btn--cta btn--full" href="#devis">Demander un devis gratuit</a>
+              <a class="btn btn--primary btn--cta btn--full quote-btn" id="quote-btn" href="#devis">Demander un devis gratuit</a>
               <a class="btn btn--ghost btn--full hero__secondary-btn" href="#simulateur">Estimer mon prix</a>
             </div>
 
@@ -311,7 +320,7 @@
               </div>
               <p class="sim__note">Estimation indicative, devis final après validation.</p>
               <div class="sim__cta">
-                <a class="btn btn--primary btn--cta btn--full" href="#devis">Demander mon devis</a>
+                <a class="btn btn--primary btn--cta btn--full quote-btn" href="#devis">Demander mon devis</a>
               </div>
             </div>
           </div>
@@ -335,7 +344,7 @@
             id="devis-form"
             class="form"
             method="POST"
-            action="https://formspree.io/f/mojpqojq"
+            action="https://formspree.io/f/xeepoyob"
           >
             <!-- Tracking UTM -->
             <input type="hidden" name="utm_source" id="utm_source" />
@@ -396,7 +405,7 @@
             </div>
 
             <div class="form__cta">
-              <button class="btn btn--primary btn--cta btn--full" type="submit">Demander mon devis gratuit</button>
+              <button class="btn btn--primary btn--cta btn--full quote-btn" type="submit">Demander mon devis gratuit</button>
               <p class="form__fineprint">Devis gratuit, sans engagement.</p>
             </div>
 
@@ -426,6 +435,84 @@
     </footer>
 
     <script src="./script.js" defer></script>
+    <script>
+      (function () {
+        const params = new URLSearchParams(window.location.search);
+        const rawPricing = (params.get("pricing") || "A").toUpperCase();
+        const pricing = ["A", "B", "C", "D"].includes(rawPricing) ? rawPricing : "A";
+        const page = window.location.pathname;
+        const pageTitle = document.title;
+
+        function track(eventName, payload) {
+          if (typeof window.gtag !== "function") return;
+          window.gtag("event", eventName, payload);
+        }
+
+        track("pricing_view", { pricing: pricing });
+
+        const quoteButtons = document.querySelectorAll(
+          '.quote-btn:not(button[type="submit"]):not(input[type="submit"])'
+        );
+        quoteButtons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            track("request_quote_click", {
+              pricing: pricing,
+              button_text: (button.innerText || "").trim(),
+              page: page
+            });
+          });
+        });
+
+        // Track only the real quote form submission (keeps GA4 automatic form_submit untouched).
+        // Delegation is resilient if the form is re-rendered dynamically.
+        if (!document.documentElement.dataset.gaQuoteSubmitBound) {
+          document.documentElement.dataset.gaQuoteSubmitBound = "1";
+          document.addEventListener("submit", function (event) {
+            const form = event.target;
+            if (!(form instanceof HTMLFormElement)) return;
+            if (form.id !== "devis-form") return;
+
+            track("quote_submitted", {
+              pricing: pricing,
+              page: page,
+              page_title: pageTitle
+            });
+          });
+        }
+
+        let scroll50Sent = false;
+        let priceFocusSent = false;
+
+        function markPriceFocus() {
+          if (priceFocusSent) return;
+          priceFocusSent = true;
+          track("price_focus", { pricing: pricing });
+        }
+
+        window.addEventListener("scroll", function () {
+          const doc = document.documentElement;
+          const scrollTop = window.scrollY || doc.scrollTop || 0;
+          const scrollable = doc.scrollHeight - window.innerHeight;
+          if (scrollable <= 0) return;
+          const ratio = (scrollTop / scrollable) * 100;
+
+          if (!scroll50Sent && ratio >= 50) {
+            scroll50Sent = true;
+            track("scroll_50", { pricing: pricing });
+          }
+
+          if (ratio > 75) markPriceFocus();
+        }, { passive: true });
+
+        window.setTimeout(function () {
+          track("time_engaged_10s", { pricing: pricing });
+        }, 10000);
+
+        window.setTimeout(function () {
+          markPriceFocus();
+        }, 20000);
+      })();
+    </script>
   </body>
 </html>
 
