@@ -10,6 +10,7 @@ const currency = new Intl.NumberFormat("fr-BE", {
 const BASE_A = {
   roof_simple: 9.5,
   roof_demossage: 14,
+  roof_hydrofuge: 18,
   facades_clean: 9.5,
   hydrofuge: 18,
   windows: 9,
@@ -35,6 +36,7 @@ function scaleRates(base, factor) {
   return {
     roof_simple: base.roof_simple * factor,
     roof_demossage: base.roof_demossage * factor,
+    roof_hydrofuge: base.roof_hydrofuge * factor,
     facades_clean: base.facades_clean * factor,
     hydrofuge: base.hydrofuge * factor,
     windows: base.windows * factor,
@@ -82,6 +84,7 @@ const CATEGORIES = {
   roof: [
     { key: "roof_simple", label: "Traitement toiture simple", unit: "m2" },
     { key: "roof_demossage", label: "Demoussage toiture", unit: "m2" },
+    { key: "roof_hydrofuge", label: "Traitement hydrofuge", unit: "m2" },
   ],
   facade: [
     { key: "facades_clean", label: "Nettoyage facade", unit: "m2" },
@@ -94,6 +97,7 @@ const CATEGORIES = {
 const FORM_SERVICE_MAP = {
   roof_simple: "toiture",
   roof_demossage: "toiture",
+  roof_hydrofuge: "toiture_hydrofuge",
   facades_clean: "facade",
   hydrofuge: "facade",
   panels: "panneaux",

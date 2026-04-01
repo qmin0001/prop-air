@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Prop'Air : nettoyage extérieur par drone. Toitures, façades, panneaux solaires (nettoyage) et vitres. Demandez un devis gratuit." />
+    <meta name="description" content="Prop'Air : nettoyage extérieur par drone. Toitures (dont traitement hydrofuge), façades, panneaux solaires (nettoyage) et vitres. Demandez un devis gratuit." />
     <title>Prop'Air | Nettoyage extérieur par drone</title>
     <link rel="stylesheet" href="./style.css" />
     <!-- Google tag (gtag.js) -->
@@ -68,7 +68,7 @@
 
             <h1 class="hero__title">Nettoyage extérieur par drone, simple et rapide.</h1>
             <p class="hero__subtitle">Une nouvelle manière de nettoyer son extérieur : plus simple, plus rapide, plus concrète.</p>
-            <p class="hero__subtitle">L'été approche. Toiture, façade, vitres et panneaux solaires : c'est le bon moment.</p>
+            <p class="hero__subtitle">L'été approche. Toiture (nettoyage et hydrofuge), façade, vitres et panneaux solaires : c'est le bon moment.</p>
 
             <div class="hero__cta">
               <a class="btn btn--primary btn--cta btn--full quote-btn" id="quote-btn" href="#devis">Demander un devis gratuit</a>
@@ -116,6 +116,15 @@
                     </svg>
                   </span>
                   Toitures
+                </div>
+                <div class="chip">
+                  <span class="chip__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 3v4M12 17v4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M3 12h4M17 12h4M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M8 14c2 3 6 3 8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  Hydrofuge
                 </div>
                 <div class="chip">
                   <span class="chip__icon" aria-hidden="true">
@@ -184,6 +193,16 @@
                 </svg>
               </span>
               <span>Toitures</span>
+            </div>
+            <div class="service-item">
+              <span class="service-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 10.5 12 3l9 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5.5 10.5V21h13V10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 14v4M9 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span>Traitement hydrofuge</span>
             </div>
             <div class="service-item">
               <span class="service-ico" aria-hidden="true">
@@ -338,7 +357,7 @@
       <section class="section" id="devis">
         <div class="container">
           <h2 class="section-title">Demander un devis</h2>
-          <p class="section-subtitle">Devis gratuit, sans engagement. Réponse sous 24h.</p>
+          <p class="section-subtitle">Devis gratuit, sans engagement. Réponse sous 24h. Téléphone : <a href="tel:+32493829810">+32&nbsp;493&nbsp;82&nbsp;98&nbsp;10</a></p>
 
           <form
             id="devis-form"
@@ -386,6 +405,7 @@
                 <select id="form-service" class="field__control" name="service" required>
                   <option value="">Sélectionner</option>
                   <option value="toiture">Toiture</option>
+                  <option value="toiture_hydrofuge">Traitement hydrofuge</option>
                   <option value="facade">Façade</option>
                   <option value="panneaux">Panneaux solaires (nettoyage)</option>
                   <option value="vitres">Vitres</option>
@@ -425,6 +445,7 @@
         </div>
         <div class="footer__col">
           <div class="footer__label">Contact</div>
+          <a class="footer__link" href="tel:+32493829810">+32&nbsp;493&nbsp;82&nbsp;98&nbsp;10</a><br />
           <a class="footer__link" href="mailto:propair.bruxelles@yahoo.com">propair.bruxelles@yahoo.com</a>
         </div>
         <div class="footer__col">
